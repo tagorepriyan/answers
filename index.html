@@ -2,51 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embedded Google Doc</title>
+    <title>Answers</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         html, body {
             height: 100%;
-            width: 100%;
+            margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
         }
 
-        body.light-mode {
-            background-color: #e0eafc;
-        }
-
-        body.dark-mode {
-            background-color: #333;
-            color: #fff;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Toggle button styles */
-        .toggle-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 10px 20px;
-            background-color: #8eaec9;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Progress bar styles */
         .progress-container {
             position: fixed;
             top: 0;
@@ -54,53 +19,57 @@
             width: 100%;
             background-color: #f3f3f3;
             height: 5px;
-            z-index: 100;
+            z-index: 10;
         }
 
         .progress-bar {
             height: 5px;
+            padding-bottom: 2px;
             background-color: #4caf50;
             width: 0%;
-            transition: width 0.2s;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            padding: 0;
+        }
+
+        .iframe-container {
+            height: 100%;
+            overflow-y: scroll;
         }
     </style>
 </head>
-<body class="light-mode">
+<body>
     <!-- Progress bar container -->
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
 
-    <!-- Dark mode toggle button -->
-    <button class="toggle-button" id="dark-mode-toggle">Toggle Dark Mode</button>
-
-    <!-- Embedded Google Doc -->
-    <iframe src="https://docs.google.com/document/d/1-eUtGPp5OGevUgTeGFFgirTrPrbKn4BMlaM9YdzMVV0/pub?embedded=true" title="Embedded Google Doc"></iframe>
+    <!-- Scrollable iframe container -->
+    <div class="iframe-container" id="iframe-container">
+        <iframe src="https://docs.google.com/document/d/1-eUtGPp5OGevUgTeGFFgirTrPrbKn4BMlaM9YdzMVV0/pub?embedded=true" title="Google Doc"></iframe>
+    </div>
 
     <script>
-        // Dark mode toggle functionality
-        const toggleButton = document.getElementById('dark-mode-toggle');
-        toggleButton.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            document.body.classList.toggle('light-mode');
-        });
-
-        // Simulated scroll progress
-        let progress = 0;
+        const iframeContainer = document.getElementById('iframe-container');
         const progressBar = document.getElementById('progress-bar');
 
-        // Simulate the progress bar filling up over time
-        const interval = setInterval(() => {
-            if (progress < 100) {
-                progress += 1; // Increase progress
-                progressBar.style.width = progress + '%';
-            } else {
-                clearInterval(interval); // Stop when it reaches 100%
-            }
-        }, 1000); // Update progress every 1 second
+        // Listen to the scroll event of the iframe container
+        iframeContainer.addEventListener('scroll', function() {
+            const scrollTop = iframeContainer.scrollTop;
+            const scrollHeight = iframeContainer.scrollHeight - iframeContainer.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+
+            // Update progress bar width
+            progressBar.style.width = scrolled + "%";
+        });
     </script>
-            <footer>
-                &copy; 2024 Tagorepriyan S P.
-            </footer>
+                <footer>
+                    &copy; 2024 Tagorepriyan S P
+                </footer>
 </body>
 </html>
