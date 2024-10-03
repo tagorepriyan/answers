@@ -3,30 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Answers</title>
+    <title>Answers For Imp Ques</title>
     <style>
         html, body {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-        }
-
-        .progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #f3f3f3;
-            height: 5px;
-            z-index: 10;
-        }
-
-        .progress-bar {
-            height: 5px;
-            padding-bottom: 2px;
-            background-color: #4caf50;
-            width: 0%;
         }
 
         iframe {
@@ -44,32 +27,13 @@
     </style>
 </head>
 <body>
-    <!-- Progress bar container -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progress-bar"></div>
-    </div>
-
-    <!-- Scrollable iframe container -->
     <div class="iframe-container" id="iframe-container">
         <iframe src="https://docs.google.com/document/d/1-eUtGPp5OGevUgTeGFFgirTrPrbKn4BMlaM9YdzMVV0/pub?embedded=true" title="Google Doc"></iframe>
     </div>
 
-    <script>
-        const iframeContainer = document.getElementById('iframe-container');
-        const progressBar = document.getElementById('progress-bar');
 
-        // Listen to the scroll event of the iframe container
-        iframeContainer.addEventListener('scroll', function() {
-            const scrollTop = iframeContainer.scrollTop;
-            const scrollHeight = iframeContainer.scrollHeight - iframeContainer.clientHeight;
-            const scrolled = (scrollTop / scrollHeight) * 100;
-
-            // Update progress bar width
-            progressBar.style.width = scrolled + "%";
-        });
-    </script>
-                <footer>
-                    &copy; 2024 Tagorepriyan S P
-                </footer>
+    <footer>
+        &copy; 2024 Tagorepriyan S P
+    </footer>
 </body>
 </html>
